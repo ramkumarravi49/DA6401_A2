@@ -13,13 +13,13 @@ Assignment_2/
 ├── top1.ckpt                         #best model trained weights  saved
 ├── top2.ckpt
 |
-├── b_model.py                         # CNN model definition (flexible params)
+├── b_model.py                         # CNN model definition (
 │                          
 │
 ├── b_helper.py                        # data handling  and logging into wandb 
 │   
 │
-├── b_train.py.py                      # train ans test model and class wise predction grid 
+├── b_train.py.py                      # train ans test model 
 │   
 │   
 │
