@@ -2,7 +2,7 @@
 ## Overview 
 This part of the assignment focuses on leveraging pre-trained CNN architectures (e.g., ResNet50, VGG16, EfficientNet, etc.) to perform transfer learning on a subset of the iNaturalist dataset. The goal is to adapt an ImageNet-trained model for our 10-class classification problem.
 
-## Project Structure (Part A)
+## Project Structure (Part B)
 ```
 Assignment_2/
 ├── data/
