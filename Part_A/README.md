@@ -48,7 +48,7 @@ Assignment_2/
 Run the coomand : ```pip install -r requirements.txt```
 
 ### Step 2 : Evaluate the best model on test data and generate class-wise prediction grid
-RUn the command : ```train.py```
+Run the command : ```python train.py```
 
 
 
