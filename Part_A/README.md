@@ -1,34 +1,38 @@
+## Task details (Part A)
+*  Build a configurable CNN from scratch using PyTorch
+*  Perform hyperparameter tuning using wandb sweeps
+*  Evaluate the best model on the test set
+*  Visualize predictions in a creative 10x3 grid format
+  
 ## Project Structure (Part A)
 ```
 Assignment_2/
 ├── data/
 |  ├── train                         # Raw iNaturalist train data (to be split into train/val) 
-|  └── val                           # iNaturalist test set (used only in final evaluation)
-| 
-├── models/
-│   └── cnn.py                       # CNN model definition (flexible params)
-│
-├── dataloaders/
-│   └── dataloader.py                # Training/val/test data handling
-│
-├── trainer/
-│   └── lightning_wrapper.py         # LightningModule for training
-│
-├── sweeps/
-│   ├── sweep_config.py              # wandb sweep config
-│   └── sweep_runner.py              # script to run sweeps
-│
-├── evaluate_best_model.py           # Train on full train set + test eval
+|  └── test                          # iNaturalist test set (used only in final evaluation)
 |
-├── Prediction Sample Images  
-│   ├── classwise sample images of prediction
+|
+├── best_model.ckpt                  #best model trained weights  saved  
+|
+├── model.py                         # CNN model definition (flexible params)
+│                          
+│
+├── helper.py                        # data handling  and logging into wandb 
+│   
+│
+├── train.py.py                      # train ans test model and class wise predction grid 
+│   
+│
+|
+├── Final_prediction.png             # Test Reulst Sample Image
+│   
 │
 ├── README.md                         
 ├── requirements.txt                 # All dependencies
 ```
 ## Dataset Details
 *  Train folder: Used for both training and validation (80/20 stratified split)
-*  Val folder: Treated as test set (only evaluated at the end)
+*  Test folder: Treated as test set (only evaluated at the end)
 *  Dataset: Subset of iNaturalist classification dataset with 10 animal classes
 
 ## Libraries Used 
@@ -43,18 +47,14 @@ Assignment_2/
 ### Step 1 : Install Dependencies
 Run the coomand : ```pip install -r requirements.txt```
 
-### Step 2 : Run the sweeps ( Hyper parameter tuning - Q2 )
-Run the command : ```python sweeps/sweep_runner.py```
+### Step 2 : Evaluate the best model on test data and generate class-wise prediction grid
+RUn the command : ```train.py```
 
-### Step 3 : Evaluate the best model on test data
-RUn the command : ```python eval_best_model.py```
 
-### Step 4 : Generate Class-wise Prediction Grid (10x3)
-The above program it self will generate the prediction grid for all classes ( 3 images per class ) with True and Predicted label
 
 ## Experiment Tracking with wandb
 The experiments were tracked using Weights & Biases, and detailed visualizations and insights can be found at the following report: 
-https://wandb.ai/da24m020-iit-madras/DA6401_A2/reports/DA6401-Assignment-2-Report--VmlldzoxMjI5NTQ1Nw?accessToken=oc3vijucgg3gitvesrogrwsr64gg68mkl2luos938nw4oqprmpx46b57x0psjcyq
+https://wandb.ai/cs24m037-iit-madras/DA6401_A2/reports/DA6401-Assignment-2--VmlldzoxMjM0MTczMw?accessToken=xbk3gqrjb1d51zy7fg0mingbtte79xdn9cwer3idoii6lawmrn13pj21piqiw6iq
 
 ## Some Key Observation 
 *  SiLU consistently performed better than ReLU/GELU
