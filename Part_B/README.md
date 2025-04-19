@@ -10,19 +10,17 @@ Assignment_2/
 |  └── test                          # iNaturalist test set (used only in final evaluation)
 |
 |
-├── best_model.ckpt                  #best model trained weights  saved  
+├── top1.ckpt                         #best model trained weights  saved
+├── top2.ckpt
 |
-├── model.py                         # CNN model definition (flexible params)
+├── b_model.py                         # CNN model definition (flexible params)
 │                          
 │
-├── helper.py                        # data handling  and logging into wandb 
+├── b_helper.py                        # data handling  and logging into wandb 
 │   
 │
-├── train.py.py                      # train ans test model and class wise predction grid 
+├── b_train.py.py                      # train ans test model and class wise predction grid 
 │   
-│
-|
-├── Final_prediction.png             # Test Reulst Sample Image
 │   
 │
 ├── README.md                         
@@ -46,7 +44,7 @@ Assignment_2/
 Run the coomand : ```pip install -r requirements.txt```
 
 ### Step 2 : Evaluate the best model on test data and generate class-wise prediction grid
-RUn the command : ```train.py```
+RUn the command : ```b_train.py```
 
 
 
