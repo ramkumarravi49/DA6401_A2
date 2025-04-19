@@ -95,18 +95,18 @@ Final sweep config that produced the best results:
 }
 ```
 ## Final Results
-Best Validation Accuracy: 46.3%
+- Best Validation Accuracy: 46.3%
 (achieved after adding One-Cycle LR + better augmentation on top sweep config)
 
-Test Accuracy (on best model):~ 47%
+- Test Accuracy (on best model):~ 47%
 
-Model Size: ~3.7M parameters
+- Model Size: ~3.7M parameters
 
-Prediction Grid: A 10x3 creative visualization of predictions from the test set is included as Final_prediction.png
+- Prediction Grid: A 10x3 visualization of predictions included as Final_prediction.png
 
 
 ## Final Results 
-* Best Validation Accuracy : ~ 46%
-* Highest Test Accuracy on Best Model : ~ 47%
+* Best Val Accuracy : ~ 46%
+* Test Accuracy on Best Model : ~ 47%
 
 
