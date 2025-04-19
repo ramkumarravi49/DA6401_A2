@@ -53,16 +53,44 @@ The experiments were tracked using Weights & Biases, and detailed visualizations
 https://wandb.ai/cs24m037-iit-madras/DA6401_A2/reports/DA6401-Assignment-2--VmlldzoxMjM0MTczMw?accessToken=xbk3gqrjb1d51zy7fg0mingbtte79xdn9cwer3idoii6lawmrn13pj21piqiw6iq
 
 
-## Key Observations
-*  ResNet50 performed very well and achieved validation accuracy above 85.
-*  Layer freezing helps significantly on small datasets.
-*  Adam and Nadam generally performed better than SGD.
-*  Wandb sweeps helped in exploring a large hyperparameter space efficiently.
+Strategies:
+
+- Freeze All: Only the classifier layer was trained.
+
+- Freeze Early Layers: The last convolutional block (stage 4) + classifier layer were trained.
+
+- Gradual Unfreezing: The classifier layer was trained initially; later, deeper layers (starting from stage 4) were progressively unfrozen.
+
+Sweep 1 – Grid Search: Explored freeze type (all, gradual), image resolution (224, 299), batch_size (32, 64, 128), and dropout (0.0, 0.2, 0.4).  Found that gradual unfreezing, 299×299 input resolution, and batch size of 64 performed best.
+
+Sweep 2 – Fine-tuning Optimization: Introduced separate learning rates for classifier (head_lr) and stage-4 layers (layer4_lr). Added new hyperparameters like unfreeze_epoch, optimizer, label_smoothing, and weight_decay.
+
+Best Sweep Configuration:
+```
+{
+  "freeze": "gradual",
+  "resolution": 299,
+  "batch_size": 64,
+  "dropout": 0.2,
+  "data_aug": true,
+  "head_lr": 0.0031,
+  "layer4_lr": 0.00014,
+  "weight_decay": 1.05e-4,
+  "label_smoothing": 0.0645,
+  "unfreeze_epoch": 5,
+  "optimizer": "Adam"
+}
+```
+This configuration yielded a Test Accuracy of 80.85%.
 
 ## Final Results
-*  Best Validation Accuracy : ~ 86%
-*  Highest Test Accuracy on Test Dataset : ~ 85% 
 
-## Final Note
-All the experiments related to hyper parameter tuning and metric evaluation have been perfomed in kaggle jupyter environment only.
-All the experiments are reprocible but make sure to them in environment with powerful computational resources (15gb+ CPU and 10gb+ GPU i.e. Kaggle,Colab). 
+- Final Model: ResNet50 with gradual unfreezing and learning rate scheduling between layers.
+
+- Best Val Accuracy ~ 81% .
+
+- Best Test Accuracy: ~ 80%
+
+- Trainable Parameters: ~20.5K
+
+- Model Checkpoint: Saved as top1.ckpt
