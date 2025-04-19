@@ -64,21 +64,21 @@ Sweep A (v2): A zoom-in and focused sweep with 32 runs (20 epochs + early stoppi
 
 ## Observations from sweeps:
 
-Activation Function: Mish consistently outperformed ReLU, GELU, and SiLU. All top-performing configs used Mish.
+- Activation Function: Mish consistently outperformed ReLU, GELU, and SiLU. All top-performing configs used Mish.
 
-Dropout: 0.2 emerged as an optimal value; 0.5 was poor and dropped in v2.
+- Dropout: 0.2 emerged as an optimal value; 0.5 was poor and dropped in v2.
 
-Dense Neurons: 256 and 512 gave better accuracy; 256 was more stable.
+- Dense Neurons: 256 and 512 gave better accuracy; 256 was more stable.
 
-Filter Organizations: "32_512" and "pyramid_*" structures worked best. Avoided shallow configurations like "16_*".
+- Filter Organizations: "32_512" and "pyramid_*" structures worked best. Avoided shallow configurations like "16_*".
 
-Learning Rate: Best performance observed in [1.5e-4, 4e-4], peak at ~1.77e-4.
+- Learning Rate: Best performance observed in [1.5e-4, 4e-4], peak at ~1.77e-4.
 
-Data Augmentation & BatchNorm: Always enabled in best configs.
+- Data Augmentation & BatchNorm: Always enabled in best configs.
 
-One-Cycle Learning Rate Schedule: Added in v2 for final config, boosted val acc by +1.4%.
+- One-Cycle Learning Rate Schedule: Added in v2 for final config, boosted val acc by +1.4%.
 
-Batch Size: 64 gave better convergence
+- Batch Size: 64 gave better convergence
 
 Final sweep config that produced the best results:
 ```
