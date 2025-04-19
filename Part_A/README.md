@@ -56,16 +56,57 @@ RUn the command : ```train.py```
 The experiments were tracked using Weights & Biases, and detailed visualizations and insights can be found at the following report: 
 https://wandb.ai/cs24m037-iit-madras/DA6401_A2/reports/DA6401-Assignment-2--VmlldzoxMjM0MTczMw?accessToken=xbk3gqrjb1d51zy7fg0mingbtte79xdn9cwer3idoii6lawmrn13pj21piqiw6iq
 
-## Some Key Observation 
-*  SiLU consistently performed better than ReLU/GELU
-*  Nadam and RMSProp outperformed Adam in many configurations
-*  Using batchnorm=True and data_aug=True improved accuracy by 5-10%
-*  Dropout=0.3, Dense=128, and Filters=64 or 128 gave consistently strong results
-*  A focused second phase sweep improved validation accuracy from ~41% to ~50.45%
+We used two sweeps:
+
+Sweep A (v1): A wide-net exploratory sweep with 105 runs (10 epochs each). This sweep helped identify key hyperparameters.
+
+Sweep A (v2): A zoom-in and focused sweep with 32 runs (20 epochs + early stopping), guided by the learnings from v1.
+
+## Observations from sweeps:
+
+Activation Function: Mish consistently outperformed ReLU, GELU, and SiLU. All top-performing configs used Mish.
+
+Dropout: 0.2 emerged as an optimal value; 0.5 was poor and dropped in v2.
+
+Dense Neurons: 256 and 512 gave better accuracy; 256 was more stable.
+
+Filter Organizations: "32_512" and "pyramid_*" structures worked best. Avoided shallow configurations like "16_*".
+
+Learning Rate: Best performance observed in [1.5e-4, 4e-4], peak at ~1.77e-4.
+
+Data Augmentation & BatchNorm: Always enabled in best configs.
+
+One-Cycle Learning Rate Schedule: Added in v2 for final config, boosted val acc by +1.4%.
+
+Batch Size: 64 gave better convergence
+
+Final sweep config that produced the best results:
+```
+{
+ "activation_fn": "mish",
+ "filter_organization": "32_512",
+ "data_aug": true,
+ "batchnorm": true,
+ "dropout": 0.4,
+ "dense_neurons": 256,
+ "learning_rate": 0.000177,
+ "filter_size": 3,
+ "batch_size": 64
+}
+```
+## Final Results
+Best Validation Accuracy: 46.3%
+(achieved after adding One-Cycle LR + better augmentation on top sweep config)
+
+Test Accuracy (on best model):~ 47%
+
+Model Size: ~3.7M parameters
+
+Prediction Grid: A 10x3 creative visualization of predictions from the test set is included as Final_prediction.png
 
 
 ## Final Results 
-* Best Validation Accuracy : ~ 50%
+* Best Validation Accuracy : ~ 46%
 * Highest Test Accuracy on Best Model : ~ 47%
 
 
